@@ -12,7 +12,7 @@ import lombok.Data;
 public class Book {
     
     @Id
-    private int bookId;
+    private Long bookId;
 
     private String title;
 
