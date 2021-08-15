@@ -21,15 +21,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>タイトル</td>
-        <td>ボディaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+      <tr th:each="book : ${bookList}" th:object="${book}">
+        <td th:text="*{title}"></td>
+        <td th:text="*{content}"></td>
         <td><a href="#">Show</a></td>
         <td><a href="#">Edit</a></td>
         <td><a href="#">Destroy</a></td>
       </tr>
     </tbody>
   </table>
+  <h2>New book</h2>
+  <form action="#" method="post" th:action="@{/book/save}" th:object="${bookForm}">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" th:value="*{title}">
+    <label for="content" style="margin-top: 10px;">Body</label>
+    <textarea name="content" id="content" rows="2" th:field="*{content}"></textarea><br>
+    <input type="submit" value="Create Book" style="margin-top: 10px;">
+  </form>
 </body>
 
 </html>
