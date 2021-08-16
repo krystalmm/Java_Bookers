@@ -9,6 +9,8 @@
 </head>
 
 <body>
+  <div th:if="${complete}" th:text="${complete}" style="color: blueviolet;"></div>
+  <div th:if="${delete}" th:text="${delete}" style="color: blueviolet;"></div>
   <h1>Books</h1>
   <table>
     <thead>
@@ -24,9 +26,9 @@
       <tr th:each="book : ${bookList}" th:object="${book}">
         <td th:text="*{title}"></td>
         <td th:text="*{content}"></td>
-        <td><a th:href="@{/books/} + *{bookId}">Show</a></td>
-        <td><a href="#">Edit</a></td>
-        <td><a href="#">Destroy</a></td>
+        <td><a th:href="@{/books/{bookId}(bookId=*{bookId})}">Show</a></td>
+        <td><a th:href="@{/books/{bookId}/edit(bookId=*{bookId})}">Edit</a></td>
+        <td><a th:href="@{/books/delete/{bookId}(bookId=*{bookId})}">Destroy</a></td>
       </tr>
     </tbody>
   </table>

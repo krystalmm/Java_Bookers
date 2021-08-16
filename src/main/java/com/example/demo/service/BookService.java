@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.example.demo.dto.BookDto;
 import com.example.demo.entity.Book;
@@ -18,21 +17,32 @@ public class BookService {
     BookRepository bookRepository;
 
     public List<Book> getAll() {
-        List<Book> bookList = bookRepository.findAll();
-        return bookList;
+        return bookRepository.findAll();
     }
 
-    public Optional<Book> getBook(Long bookId) {
-        Optional<Book> book = bookRepository.findById(bookId);
-        return book;
+    public Book getBook(Long bookId) {
+        return bookRepository.findByBookId(bookId);
     }
 
     @Transactional
     public void save(BookDto dto) {
-        Book book = new Book();
+        bookRepository.save(setBook(new Book(), dto));
+    }
+
+    @Transactional
+    public void delete(Long bookId) {
+        bookRepository.deleteById(bookId);
+    }
+
+    @Transactional
+    public void update(BookDto dto) {
+        bookRepository.save(setBook(bookRepository.findByBookId(dto.getBookId()), dto));
+    }
+
+    private Book setBook(Book book, BookDto dto) {
         book.setTitle(dto.getTitle());
         book.setContent(dto.getContent());
-        bookRepository.save(book);
+        return book;
     }
 }
 

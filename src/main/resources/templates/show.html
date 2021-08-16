@@ -9,11 +9,12 @@
 </head>
 
 <body>
+  <div th:if="${update}" th:text="${update}" style="color: blueviolet;"></div>
   <div style="margin-top: 20px;">
     <p><strong>Title:</strong> <span th:text="${bookForm.title}"></span></p>
     <p><strong>Body:</strong> <span th:text="${bookForm.content}"></span></p>
   </div>
-  <a href="#">Edit</a> | <a th:href="@{/books}">Back</a>
+  <a th:href="@{/books/{bookId}/edit(bookId=${bookForm.bookId})}">Edit</a> | <a th:href="@{/books}">Back</a>
 </body>
 
 </html>
